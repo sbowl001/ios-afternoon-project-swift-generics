@@ -3,16 +3,23 @@ import UIKit
 struct CountedSet<Element: Hashable> {
     
 //    private(set) var elements: [Element]
-    private(set) var elements: [Element: Int] = [:]  //why like this?
+    private(set) var elements: [Element: Int] = [:]
     
     mutating func insert(_ element: Element){
-        self.elements[element]
+//        self.elements[element]
+        elements[element] = (elements[element] ?? 0) + 1
         
     }
     
-    mutating func remove(_ element: Element) -> Int{
+    mutating func remove(_ element: Element) -> Int {
         guard let e = self.elements[element] else {return 0}
-        self.elements.remove(at: 0)
+        
+        if e == 0 {
+            
+        } else {
+            self.elements[element] = e - 1
+        }
+        return self.elements[element]!
     }
 
 
@@ -21,7 +28,7 @@ struct CountedSet<Element: Hashable> {
 }
     mutating func count(_ element: Element) -> Int {
         if self.elements.isEmpty {
-            return self.elements.count == 0
+            return 0
         }
         else {
             return self.elements.count
@@ -43,6 +50,6 @@ var aCountedSet = CountedSet<Arrow>()
 aCountedSet[.iron] // 0
 var myCountedSet: CountedSet<Arrow> = [.iron, .magic, .iron, .silver, .iron, .iron]
 myCountedSet[.iron] // 4
-myCountedSet.remove(.iron) // 3
-myCountedSet.remove(.dwarvish) // 0
-myCountedSet.remove(.magic) // 0
+//myCountedSet.remove(.iron) // 3
+//myCountedSet.remove(.dwarvish) // 0
+//myCountedSet.remove(.magic) // 0
