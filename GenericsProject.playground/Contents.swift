@@ -11,16 +11,17 @@ struct CountedSet<Element: Hashable> {
         
     }
     
-    mutating func remove(_ element: Element) -> Int {
-        guard let e = self.elements[element] else {return 0}
-        
-        if e == 0 {
-            
-        } else {
+    mutating func remove(_ element: Element)   {
+    
+       let e = self.elements[element] ?? 0
+  
+       
+        if e > 0 {
             self.elements[element] = e - 1
         }
-        return self.elements[element]!
+        
     }
+ 
 
 
     subscript(_ element: Element) -> Int {
@@ -50,6 +51,6 @@ var aCountedSet = CountedSet<Arrow>()
 aCountedSet[.iron] // 0
 var myCountedSet: CountedSet<Arrow> = [.iron, .magic, .iron, .silver, .iron, .iron]
 myCountedSet[.iron] // 4
-//myCountedSet.remove(.iron) // 3
-//myCountedSet.remove(.dwarvish) // 0
-//myCountedSet.remove(.magic) // 0
+myCountedSet.remove(.iron) // 3
+myCountedSet.remove(.dwarvish) // 0
+myCountedSet.remove(.magic) // 0
